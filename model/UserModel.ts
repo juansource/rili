@@ -15,19 +15,18 @@ class UserModel {
     public createSchema() {
         this.schema = new Mongoose.Schema(
             {
-            userID: Number,
-            username: String,
-            email: String,
-            password: String,
-            premiumUser: Boolean,
-            calendarID: Number, // ask about this
-            createdRiliEvents: [ {
-                riliEventID: String
-            }],
-            contactList: [ {
-                userID: Number,
-                nickname: String
-            }]
+                userID: String,
+                username: String,
+                email: String,
+                password: String,
+                premiumUser: Boolean,
+                calendarID: String,
+                createdRiliEvents: [ 
+                    String
+                ],
+                contactList: [
+                    String
+                ]
             }, {collection: 'users'}
         );
     }
@@ -55,15 +54,15 @@ class UserModel {
         }
     }
 
-    public async retrieveUserCount(response:any) {
-        var query = this.model.estimatedDocumentCount();
-        try {
-            const numberOfUsers = await query.exec();
-            console.log("numberOfUsers: " + numberOfUsers);
-        }
-        catch (e) {
-            console.error(e);
-        }
-    }
+    // public async retrieveUserCount(response:any) {
+    //     var query = this.model.estimatedDocumentCount();
+    //     try {
+    //         const numberOfUsers = await query.exec();
+    //         console.log("numberOfUsers: " + numberOfUsers);
+    //     }
+    //     catch (e) {
+    //         console.error(e);
+    //     }
+    // }
 }
 export {UserModel};

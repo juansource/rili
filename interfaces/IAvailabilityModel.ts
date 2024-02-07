@@ -2,7 +2,7 @@
 import Mongoose from "mongoose";
 
 interface IAvailabilityModel extends Mongoose.Document {
-    availabilityID: number; // ask about this
+    availabilityID: string;
     riliEventID: string;
     availabilities: [ {
         userID: string;

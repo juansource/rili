@@ -15,14 +15,14 @@ class AvailabilityModel {
     public createSchema() {
         this.schema = new Mongoose.Schema(
             {
-                availabilityID: Number,
+                availabilityID: String,
                 riliEventID: String,
-                availabilties: [{
+                availabilities: [ {
                     userID: String,
-                    individualAvailability: [{
+                    individualAvailability: [ {
                         rangeStart: Date,
-                        rangeEnd: Date,
-                    }]
+                        rangeEnd: Date
+                    } ]
                 }]
             }, {collection: 'eventAvailabilities'}
         );
@@ -51,11 +51,19 @@ class AvailabilityModel {
         }
     }
 
-    public async retrieveAvailabiltiesCount(response:any) {
-        var query = this.model.estimatedDocumentCount();
+    public async retrieveAvailabilitiesCount(response:any, filter:object) {
+        var query = this.model.findOne(filter);
         try {
-            const numberOfAvailabilties = await query.exec();
-            console.log("numberOfAvailabilties: " + numberOfAvailabilties);
+            const innerAvailabilityList = await query.exec();
+            if (innerAvailabilityList == null) {
+                response.status(404);
+                response.json('{count: -1}');
+            }
+            else {
+                console.log("numberOfAvailabilties: " + innerAvailabilityList.availabilities.length);
+                response.json('{count:' + innerAvailabilityList.availabilities.length + '}');
+            }
+            
         }
         catch (e) {
             console.error(e);

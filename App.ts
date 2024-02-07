@@ -47,20 +47,52 @@ class App {
         availabilities
         */
 
-        // retrieveAvailabiltiesCount
-        router.get('/app/availabilities/:availabilityID/count', async (req, res) => {
-            var id = req.params.availabilityID;
-            console.log('Query - Availabilties with ID: ' + id);
-            await this.EventAvailabilities.retrieveAvailabiltiesCount(id);
-        });
+        //create
+        router.post('/app/:userID/:eventID/availability', async (req, res) => {
+            const id = crypto.randomBytes(16).toString("hex");
+            console.log(req.body);
+            var jsonObj = req.body;
 
-        // retrieveAvailabilityDetails
+            jsonObj.availabilityID = id;
+            jsonObj.eventID = req.params.eventID;
+
+            try {
+                await this.EventAvailabilities.model.create([jsonObj]);
+                res.send('{"id":"' + id + '"}'); // what to put here
+            }
+            catch (e) {
+                console.error(e);
+                console.log('Error - Availability Object Creation Failed');
+            }
+          });
+
+        // retrieveAvailabilityDetails - queries the general information for a availability object
         router.get('/app/availabilities/:availabilityID', async (req, res) => {
             var id = req.params.availabilityID;
             console.log('Query - Single Availability with ID: ' + id);
             await this.EventAvailabilities.retrieveAvailabilityDetails(res, id);
         });
 
+        // retrieveAvailabiltiesCount - returns the number of availabilities per event
+        router.get('/app/availabilities/:availabilityID/count', async (req, res) => {
+            var id = req.params.availabilityID;
+            console.log('Query - Availabilties with ID: ' + id);
+            await this.EventAvailabilities.retrieveAvailabilitiesCount(res, id);
+        });
+
+
+        /*
+        user
+        */
+
+        // create user
+
+        //retrieve user details
+
+        // retrieve user created events
+
+        // retrieve user contacts
+        
     }
 
 
