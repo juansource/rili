@@ -15,14 +15,14 @@ class RiliEventModel {
     public createSchema() {
         this.schema = new Mongoose.Schema(
             {
-                riliEventID: Number,  // ask about this
+                riliEventID: String,
                 name: String,
                 description: String,
                 location: String,
                 rangeStart: Date,
                 rangeEnd: Date,
-                administratorUserID: Number, // ask about this
-                availabilityID: Number  // ask about this
+                userID: String, // representing the owner of the event
+                availabilityID: String
             }, {collection: 'riliEvents'}
         );
     }
@@ -50,15 +50,15 @@ class RiliEventModel {
         }
     }
 
-    public async retrieveRiliEventCount(response:any) {
-        var query = this.model.estimatedDocumentCount();
-        try {
-            const numberOfRiliEvents = await query.exec();
-            console.log("numberOfRiliEvents: " + numberOfRiliEvents);
-        }
-        catch (e) {
-            console.error(e);
-        }
-    }
+    // public async retrieveRiliEventCount(response:any) {
+    //     var query = this.model.estimatedDocumentCount();
+    //     try {
+    //         const numberOfRiliEvents = await query.exec();
+    //         console.log("numberOfRiliEvents: " + numberOfRiliEvents);
+    //     }
+    //     catch (e) {
+    //         console.error(e);
+    //     }
+    // }
 }
 export {RiliEventModel};

@@ -2,8 +2,8 @@
 import Mongoose from "mongoose";
 
 interface CalendarIntModel extends Mongoose.Document {
-    calendarID: number; // ask about this
-    userID: number;
+    calendarID: string;
+    userID: string;
     riliEvents: [ {
         riliEventID: string;
         userDescription: string;

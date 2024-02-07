@@ -15,8 +15,8 @@ class CalendarModel {
     public createSchema() {
         this.schema = new Mongoose.Schema(
             {
-                calendarID: Number,
-                userID: Number,
+                calendarID: String,
+                userID: String,
                 riliEvents: [ {
                     riliEventID: String,
                     userDescription: String,
@@ -49,15 +49,15 @@ class CalendarModel {
         }
     }
 
-    public async retrieveCalendarsCount(response:any) {
-        var query = this.model.estimatedDocumentCount();
-        try {
-            const numberOfCalendars = await query.exec();
-            console.log("numberOfCalendars: " + numberOfCalendars);
-        }
-        catch (e) {
-            console.error(e);
-        }
-    }
+    // public async retrieveCalendarsCount(response:any) {
+    //     var query = this.model.estimatedDocumentCount();
+    //     try {
+    //         const numberOfCalendars = await query.exec();
+    //         console.log("numberOfCalendars: " + numberOfCalendars);
+    //     }
+    //     catch (e) {
+    //         console.error(e);
+    //     }
+    // }
 }
 export {CalendarModel};

@@ -2,14 +2,13 @@
 import Mongoose from "mongoose";
 
 interface IRiliEventModel extends Mongoose.Document {
-    riliEventID: number;  // ask about this
+    riliEventID: string;
     name: string;
     description: string;
     location: string;
     rangeStart: Date;
     rangeEnd: Date;
-    userID: number; // ask about this
-    availabilityID: number;  // ask about this
-    // calendar
+    userID: string; // representing the owner of the event
+    availabilityID: string;
 }
 export {IRiliEventModel};
