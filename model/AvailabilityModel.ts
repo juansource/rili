@@ -39,8 +39,9 @@ class AvailabilityModel {
         }
     }
 
-    public async retrieveAvailabilityDetails(response:any, value:number) {
-        var query = this.model.find({});
+    //
+    public async retrieveAvailabilityDetails(response:any, value:string) {
+        var query = this.model.find({userID: value});
 
         try {
             const itemArray = await query.exec();
@@ -51,8 +52,12 @@ class AvailabilityModel {
         }
     }
 
-    public async retrieveAvailabilitiesCount(response:any, filter:object) {
-        var query = this.model.findOne(filter);
+    // public async retrieveAvailabilities(response:any, value:number) {
+
+    // }
+
+    public async retrieveAvailabilitiesCount(response:any, value:string) {
+        var query = this.model.find({eventID: value});
         try {
             const innerAvailabilityList = await query.exec();
             if (innerAvailabilityList == null) {

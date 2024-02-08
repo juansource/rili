@@ -38,7 +38,7 @@ class CalendarModel {
     }
 
     public async retrieveCalendarDetails(response:any, value:number) {
-        var query = this.model.find({});
+        var query = this.model.find({userID: value});
 
         try {
             const itemArray = await query.exec();
